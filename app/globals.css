@@ -1,0 +1,377 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Brand palette — sampled directly from DentiVital_Logo1.png.
+
+   The wordmark runs through three colours, left to right:
+     plum  #7F2F7A  ("D")
+     teal  #458C9A  ("entiv")
+     green #387A5B  ("ital")
+
+   Those three are the whole system. Everything below is a tint or shade of
+   one of them, so the site can't drift away from the logo.
+
+   Note on names: the accent scale is still called `dv-coral-*` because that's
+   what the markup already uses — the *values* are now the logo's plum, and
+   `dv-plum-*` is available as an alias for new code.
+--------------------------------------------------------------------------- */
+:root {
+  /* Teal — primary. Sampled #458C9A, with darker shades for surfaces/text. */
+  --dv-teal-900: #17414a;
+  --dv-teal-700: #2a6875;
+  --dv-teal-500: #458c9a;
+  --dv-teal-300: #86bac3;
+
+  /* Plum — accent (buttons, eyebrows, highlights). Sampled #7F2F7A. */
+  --dv-plum-600: #6b2266;
+  --dv-plum-500: #7f2f7a;
+  --dv-plum-400: #9b4b95;
+  --dv-plum-100: #f6e9f5;
+
+  /* Green — the tail of the wordmark. Doubles as the success colour. */
+  --dv-green-600: #2e6549;
+  --dv-green-500: #387a5b;
+  --dv-green-100: #e4f0ea;
+
+  /* Neutrals, tinted toward the teal so nothing reads as grey-blue. */
+  --dv-ink: #16333a;
+  --dv-ink-soft: #4c6a71;
+  --dv-mint-200: #d5e8ea;
+  --dv-mint-100: #eaf5f6;
+  --dv-mint-50: #f6fbfb;
+  --dv-cream: #faf5f8;
+  --dv-line: #dbe9eb;
+  --dv-line-strong: #bfd8dc;
+
+  /* Accent aliases — the markup uses these names throughout. */
+  --dv-coral-600: var(--dv-plum-600);
+  --dv-coral-500: var(--dv-plum-500);
+  --dv-coral-100: var(--dv-plum-100);
+
+  /* Semantic colours, harmonised with the three brand hues. */
+  --dv-success: var(--dv-green-600);
+  --dv-success-bg: var(--dv-green-100);
+  --dv-warning: #a5680d;
+  --dv-warning-bg: #fbf0dd;
+  --dv-danger: #b23246;
+  --dv-danger-bg: #fbeaed;
+  --dv-info: var(--dv-teal-700);
+  --dv-info-bg: #e6f1f3;
+
+  --background: var(--dv-mint-50);
+  --foreground: var(--dv-ink);
+
+  --dv-shadow-soft: 0 1px 2px rgba(22, 51, 58, 0.04), 0 8px 24px -12px rgba(22, 51, 58, 0.18);
+  --dv-shadow-lift: 0 18px 48px -20px rgba(22, 51, 58, 0.32);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-dv-ink: var(--dv-ink);
+  --color-dv-ink-soft: var(--dv-ink-soft);
+  --color-dv-teal-900: var(--dv-teal-900);
+  --color-dv-teal-700: var(--dv-teal-700);
+  --color-dv-teal-500: var(--dv-teal-500);
+  --color-dv-teal-300: var(--dv-teal-300);
+  --color-dv-mint-200: var(--dv-mint-200);
+  --color-dv-mint-100: var(--dv-mint-100);
+  --color-dv-mint-50: var(--dv-mint-50);
+  --color-dv-cream: var(--dv-cream);
+  --color-dv-line: var(--dv-line);
+  --color-dv-line-strong: var(--dv-line-strong);
+
+  /* Accent — same values under both names. */
+  --color-dv-coral-600: var(--dv-coral-600);
+  --color-dv-coral-500: var(--dv-coral-500);
+  --color-dv-coral-100: var(--dv-coral-100);
+  --color-dv-plum-600: var(--dv-plum-600);
+  --color-dv-plum-500: var(--dv-plum-500);
+  --color-dv-plum-400: var(--dv-plum-400);
+  --color-dv-plum-100: var(--dv-plum-100);
+
+  --color-dv-green-600: var(--dv-green-600);
+  --color-dv-green-500: var(--dv-green-500);
+  --color-dv-green-100: var(--dv-green-100);
+
+  --color-dv-success: var(--dv-success);
+  --color-dv-success-bg: var(--dv-success-bg);
+  --color-dv-warning: var(--dv-warning);
+  --color-dv-warning-bg: var(--dv-warning-bg);
+  --color-dv-danger: var(--dv-danger);
+  --color-dv-danger-bg: var(--dv-danger-bg);
+  --color-dv-info: var(--dv-info);
+  --color-dv-info-bg: var(--dv-info-bg);
+
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-plex-mono);
+
+  --shadow-soft: var(--dv-shadow-soft);
+  --shadow-lift: var(--dv-shadow-lift);
+}
+
+* {
+  border-color: var(--dv-line);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display), ui-serif, Georgia, serif;
+  letter-spacing: -0.015em;
+}
+
+.eyebrow {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+::selection {
+  background: var(--dv-plum-500);
+  color: white;
+}
+
+/* Focus ring that is visible on both light and dark panels */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--dv-teal-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Checkboxes, radios and range inputs pick up the brand teal */
+input[type="checkbox"],
+input[type="radio"],
+input[type="range"] {
+  accent-color: var(--dv-teal-700);
+}
+
+/* --------------------------------------------------------------- layout -- */
+@layer components {
+  .dv-container {
+    width: 100%;
+    max-width: 78rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .dv-container {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* The logo gradient, for headings that should echo the wordmark. */
+  .dv-brand-gradient {
+    background: linear-gradient(
+      95deg,
+      var(--dv-plum-500) 0%,
+      var(--dv-teal-500) 45%,
+      var(--dv-green-500) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .dv-card {
+    background: white;
+    border: 1px solid var(--dv-line);
+    border-radius: 1.25rem;
+    box-shadow: var(--dv-shadow-soft);
+  }
+
+  .dv-input {
+    width: 100%;
+    border-radius: 0.85rem;
+    border: 1px solid var(--dv-line-strong);
+    background: white;
+    padding: 0.7rem 0.95rem;
+    font-size: 0.9rem;
+    color: var(--dv-ink);
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .dv-input::placeholder {
+    color: color-mix(in srgb, var(--dv-ink) 38%, transparent);
+  }
+
+  .dv-input:focus {
+    outline: none;
+    border-color: var(--dv-teal-500);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--dv-teal-500) 18%, transparent);
+  }
+
+  .dv-input[aria-invalid="true"] {
+    border-color: var(--dv-danger);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--dv-danger) 14%, transparent);
+  }
+
+  .dv-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--dv-teal-900);
+    margin-bottom: 0.4rem;
+  }
+
+  .dv-link-underline {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+    text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+    transition: text-decoration-color 0.2s ease;
+  }
+
+  .dv-link-underline:hover {
+    text-decoration-color: currentColor;
+  }
+}
+
+/* ----------------------------------------------------------- animations -- */
+@keyframes dv-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dv-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes dv-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes dv-slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes dv-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes dv-ken-burns {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1.12);
+  }
+}
+
+@keyframes dv-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@layer utilities {
+  .animate-dv-fade-up {
+    animation: dv-fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .animate-dv-fade-in {
+    animation: dv-fade-in 0.45s ease both;
+  }
+  .animate-dv-scale-in {
+    animation: dv-scale-in 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .animate-dv-slide-in-right {
+    animation: dv-slide-in-right 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .animate-dv-marquee {
+    animation: dv-marquee 32s linear infinite;
+  }
+  .animate-dv-ken-burns {
+    animation: dv-ken-burns 9s ease-out both;
+  }
+
+  .dv-skeleton {
+    position: relative;
+    overflow: hidden;
+    background: var(--dv-mint-100);
+  }
+  .dv-skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+    animation: dv-shimmer 1.6s infinite;
+  }
+
+  .dv-scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--dv-line-strong) transparent;
+  }
+  .dv-scrollbar-thin::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+  }
+  .dv-scrollbar-thin::-webkit-scrollbar-thumb {
+    background: var(--dv-line-strong);
+    border-radius: 99px;
+  }
+
+  .dv-no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .dv-no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
